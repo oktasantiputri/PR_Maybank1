@@ -24,12 +24,12 @@ import com.google.android.material.navigation.NavigationView;
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private ActionBarDrawerToggle toggle;
-    //private Button btn_instagram;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //btn_instagram = findViewById(R.id.btn_instagram);
+
 
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
         initView();
@@ -88,7 +88,27 @@ public class MainActivity extends AppCompatActivity {
             }
                 return true;
             }
+
+
         });
+
+         NavigationView navigationView = findViewById(R.id.navView);
+         View headerView = getLayoutInflater().inflate(R.layout.nav_header_layout,
+                 navigationView, false);
+         navigationView.addHeaderView(headerView);
+
+         Button btn_instagram = headerView.findViewById(R.id.btn_instagram);
+         btn_instagram.setOnClickListener(new View.OnClickListener()
+         {
+             @Override
+             public void onClick(View view)
+             {
+                 Toast.makeText(getApplicationContext(), "Test Header Click", Toast.LENGTH_SHORT).show();
+                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
+                 intent.setData(Uri.parse("https://www.instagram.com/oktasaaanti"));
+                 startActivity(intent);
+             }
+         });
 
     }
 
